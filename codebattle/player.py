@@ -93,18 +93,24 @@ class Player(EndPoint):
             self.alive_marines[m.id] = m
             m.set_player(self)
 
-        logger.debug("Player {0} alive marines {1}".format(id(self), self.alive_marines))
+        logger.debug("Player {0} alive marines {1}".format(id(self), self.alive_marines.keys()))
         self.room.broadcast_to_observers(message.observer.pack_create_marine_message(marines, color))
 
 
     def marine_die(self, m):
-        logger.info("Marine {0} Died. belongs to Player {1}".format(m.id, id(self)))
+        logger.info("Player {0}. Marine {1} Died".format(id(self), m.id))
         m.update(status=message.marine_pb2.Dead)
         self.alive_marines.pop(m.id)
         self.died_marines[m.id] = m
 
         if not self.alive_marines:
             self.room.player_died(self)
+
+    def on_connection_closed(self):
+        logger.info("Player {0} closed the connection".format(id(self)))
+
+    def on_connection_lost(self):
+        logger.info("Player {0} lost".format(id(self)))
 
 
     def on_data(self, data):

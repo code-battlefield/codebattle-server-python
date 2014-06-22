@@ -107,7 +107,7 @@ class Marine(object):
 
     def got_damaged(self):
         self.hp -= 10
-        logger.debug("Marine Got Damage. New Hp {0}".format(self.hp))
+        logger.debug("Marine {0} Got Damage. New Hp {0}".format(self.id, self.hp))
 
 
     def update(self, status, position=None, target_position=None, role=message.marine_pb2.Normal, damaged=False):

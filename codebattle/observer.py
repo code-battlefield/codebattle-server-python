@@ -23,7 +23,7 @@ class Observer(EndPoint):
         logger.info("Observer {0} closed the connecton".format(id(self)))
 
     def on_connection_lost(self):
-        logger.warning("Observer {0} lost".format(id(self)))
+        logger.info("Observer {0} lost".format(id(self)))
 
     def on_data(self, data):
         cmd, data = message.observer.unpack(data)
