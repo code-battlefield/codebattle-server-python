@@ -1,0 +1,3 @@
+[submodule "codebattle/prototol"]
+	path = codebattle/prototol
+	url = https://github.com/code-battlefield/codebattle-proto.git
